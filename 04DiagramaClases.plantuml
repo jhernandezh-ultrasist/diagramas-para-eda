@@ -1,0 +1,62 @@
+@startuml Diagrama de Clases
+
+package Presentacion {
+    class "JavaServer Page" as Presentacion.PresentacionJavaServerPage
+    class "Front controller" as Presentacion.PresentacionFrontcontroller
+    class "Helper" as Presentacion.PresentacionHelper
+    class "Model" as Presentacion.PresentacionModel
+
+    Presentacion.PresentacionJavaServerPage --|> Presentacion.PresentacionFrontcontroller
+    Presentacion.PresentacionFrontcontroller --|> Presentacion.PresentacionHelper: --helper
+    Presentacion.PresentacionFrontcontroller --|> Presentacion.PresentacionModel: --model
+    Presentacion.PresentacionHelper -|> Presentacion.PresentacionModel: --model
+}
+
+package Servicios {
+    class "Business service implementation" as Servicios.ServiciosBusinessServiceImplementation
+    class "Business rules" as Servicios.ServiciosBusinessRules
+    class "Message listener" as Servicios.ServiciosMessageListener
+    class "<<adapter>> End Point" as Servicios.ServiciosAdapterEndPoint
+    class "Helper" as Servicios.ServiciosHelper
+    class "Model" as Servicios.ServiciosModel
+    entity "Business service" as Servicios.ServiciosBusinessService
+    
+    Servicios.ServiciosBusinessServiceImplementation -- Servicios.ServiciosBusinessService
+    Servicios.ServiciosBusinessServiceImplementation --|> Servicios.ServiciosModel
+    Servicios.ServiciosBusinessServiceImplementation --|> Servicios.ServiciosHelper
+    Servicios.ServiciosBusinessServiceImplementation --|> Servicios.ServiciosBusinessRules
+    Servicios.ServiciosBusinessRules --|> Servicios.ServiciosModel
+    Servicios.ServiciosBusinessRules --|> Servicios.ServiciosHelper
+    Servicios.ServiciosMessageListener --|> Servicios.ServiciosBusinessService
+    Servicios.ServiciosMessageListener --|> Servicios.ServiciosModel
+    Servicios.ServiciosMessageListener --|> Servicios.ServiciosHelper
+    Servicios.ServiciosAdapterEndPoint --|> Servicios.ServiciosBusinessService
+    Servicios.ServiciosAdapterEndPoint --|> Servicios.ServiciosHelper
+    Servicios.ServiciosAdapterEndPoint --|> Servicios.ServiciosModel
+}
+
+package Integracion {
+    class "Repository implementacion" as Integracion.IntegracionRepositoryImplementation
+    class "Helper" as Integracion.IntegracionHelper
+    class "Model" as Integracion.IntegracionModel
+    entity "Repository" as Integracion.IntegracionRepository
+
+    Integracion.IntegracionRepository -- Integracion.IntegracionRepositoryImplementation: repository
+    Integracion.IntegracionRepositoryImplementation --|> Integracion.IntegracionHelper: --helper
+    Integracion.IntegracionRepositoryImplementation --|> Integracion.IntegracionModel: --model
+    Integracion.IntegracionHelper -|> Integracion.IntegracionModel: --model
+}
+
+package Infraestructura {
+    
+}
+
+Presentacion.PresentacionFrontcontroller --|> Servicios.ServiciosBusinessService: --business service
+Presentacion ..> Infraestructura
+Servicios.ServiciosBusinessServiceImplementation --|> Integracion.IntegracionRepository: -- repository
+Servicios.ServiciosBusinessRules--|> Integracion.IntegracionRepository: -- repository
+Servicios.ServiciosHelper --|> Integracion.IntegracionRepository: -- repository
+Servicios ..> Infraestructura
+Integracion ..> Infraestructura
+
+@enduml

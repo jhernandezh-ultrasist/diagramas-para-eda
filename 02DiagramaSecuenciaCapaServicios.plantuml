@@ -1,0 +1,40 @@
+@startuml Diagrama de Secuencia Capa de Servicios
+
+participant "<<Web>>\n Cliente" as WebCliente
+participant "<<Controller>>\n Front Crontoller" as FrontCrontroller
+participant "Layout Manager\n " as LayoutManager
+participant "<<JSP>>\n Business Page" as BusinessPage
+participant "<<Business Service>>\n User Services" as UserServices
+participant "<<Adapter>>\n End Point" as AdapterEndPoint
+participant "<<Business Rules>>\n Regla de Negocio" as BusinessRulesReglaDeNegocio
+participant "<<Business Domain>>\n Objetos de Negocio" as BusinessDomainObjetosDeNegocio
+
+hide footbox
+
+activate WebCliente
+WebCliente -> FrontCrontroller:  http - request
+activate FrontCrontroller
+FrontCrontroller -> LayoutManager: request page
+deactivate
+activate LayoutManager
+LayoutManager -> BusinessPage: dispatch
+deactivate
+activate BusinessPage
+BusinessPage -> UserServices: service request
+activate UserServices
+UserServices -> AdapterEndPoint: ejecuta adapter
+activate AdapterEndPoint
+AdapterEndPoint --> UserServices: resultados
+deactivate
+UserServices --> BusinessPage: service response
+UserServices -> BusinessRulesReglaDeNegocio: invoca regla de negocio
+activate BusinessRulesReglaDeNegocio
+BusinessRulesReglaDeNegocio --> UserServices: regla ejecutada
+deactivate
+UserServices -> BusinessDomainObjetosDeNegocio: actualiza modelo de dominio
+activate BusinessDomainObjetosDeNegocio
+BusinessDomainObjetosDeNegocio --> UserServices: objeto actualizado
+deactivate
+BusinessPage --> WebCliente: render business page
+
+@enduml

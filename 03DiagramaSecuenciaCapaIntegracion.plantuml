@@ -1,0 +1,29 @@
+@startuml Diagrama de Secuencia Capa de Integracion
+
+participant "<<Business Service>>\n User Services" as BusinessServiceUserServices
+participant "<<Repository>>\n Servicio Persistencia" as RepositoryServicioPersistencia
+participant "<<Helper>>\n Transformador" as HelperTransformador
+participant "<<Business Domain>>\n Entidades de Negocio" as BussinessDomainEntidadesNegocio
+participant "<<Component>>\n RDBMS" as ComponentRDBMS
+
+hide footbox
+
+activate BusinessServiceUserServices
+BusinessServiceUserServices -> RepositoryServicioPersistencia:  persiste entidad
+activate RepositoryServicioPersistencia
+RepositoryServicioPersistencia -> HelperTransformador: transforma
+activate HelperTransformador
+HelperTransformador -> BussinessDomainEntidadesNegocio: actualiza entidades
+activate BussinessDomainEntidadesNegocio
+BussinessDomainEntidadesNegocio --> HelperTransformador: objeto actualizado
+deactivate
+HelperTransformador -> ComponentRDBMS: persiste
+activate ComponentRDBMS
+ComponentRDBMS --> HelperTransformador: entidad persistida
+deactivate
+HelperTransformador --> RepositoryServicioPersistencia: objeto actualizado
+deactivate
+RepositoryServicioPersistencia --> BusinessServiceUserServices: entidad persistida
+deactivate
+
+@enduml

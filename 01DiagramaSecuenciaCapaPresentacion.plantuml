@@ -1,0 +1,26 @@
+@startuml Diagrama de Secuencia Capa de Presentacion
+
+participant "<<Web>>\n Cliente" as WebCliente
+participant "<<Controller>>\n Front Crontoller" as FrontCrontroller
+participant "Layout Manager\n " as LayoutManager
+participant "<<JSP>>\n Business Page" as BusinessPage
+participant "<<Business Service>>\n User Services" as UserServices
+hide footbox
+
+activate WebCliente
+WebCliente -> FrontCrontroller:  http - request
+activate FrontCrontroller
+FrontCrontroller -> LayoutManager: request page
+deactivate
+activate LayoutManager
+LayoutManager -> BusinessPage: dispatch
+deactivate
+activate BusinessPage
+BusinessPage -> UserServices: service request
+activate UserServices
+UserServices --> BusinessPage: service response
+deactivate
+BusinessPage --> WebCliente: render Business Page
+deactivate
+
+@enduml
