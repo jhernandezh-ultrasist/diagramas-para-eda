@@ -1,6 +1,6 @@
 # **Manual de la VUCEM 3.0**
 
-este es un parrafo
+Este documento cuenta con los diagramas de la VUCEM 3.0 con el objetivo de servir de referencia para analistas, desarrolladores, integradores de datos, administradores de bases de datos, infrestructura y todo el personal que necesite y requiera conocer los diagramas de la VUCEM
 
 ## estes es un subtitulo
 
@@ -26,3 +26,5 @@ estes es un *parrafo* con una palabra en negrita
 este es un codigo
 ´´´
 >Nota: Para mayor informacion de los tramites de la vucem visitar el sitio web del [SAT](https://www.sat.gob.mx/home)
+
+>Si es ne
