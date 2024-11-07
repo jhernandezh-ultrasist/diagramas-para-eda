@@ -1,0 +1,32 @@
+@startuml Diagrama de Secuencia Capa de Presentacion
+
+actor "VUCEM\n back" as VucemBack
+participant "Browser\n " as Browser
+participant "REST\n Controller" as RestController
+participant "Service 1\n " as Service1
+participant "Service N...\n " as ServiceN
+participant "Mapper\n " as Mapper
+
+hide footbox
+
+VucemBack -> Browser:  acción visual
+activate Browser
+Browser -> RestController: api Call
+activate RestController
+RestController -> Service1: funcionalidad A
+activate Service1
+Service1 -> Mapper: persistence call
+activate Mapper
+deactivate
+Mapper --> Service1
+Service1 -> ServiceN: funcionalidad B
+ServiceN -> Mapper: persistence call
+activate Mapper
+deactivate
+Mapper --> ServiceN
+ServiceN --> Service1
+Service1 --> RestController
+RestController --> Browser
+
+
+@enduml
