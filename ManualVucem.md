@@ -3,14 +3,28 @@
 Este documento cuenta con los diagramas de la VUCEM 3.0 con el objetivo de servir de referencia para analistas, desarrolladores, integradores de datos, administradores de bases de datos, infrestructura y todo el personal que necesite y requiera conocer los diagramas de la VUCEM
 
 ## 1. Diagrama general de vucem 2.5
+Este diagrama contiene la vista general de la vucem asi como los procesos que la conforman
+
 ![image](https://github.com/user-attachments/assets/aa3db512-9a09-4680-a878-cff071aad7b6)
 
+- Vucem
+- Rest Controller
+- Service
+- ServiceImpl
+- Model
+- Persistencia Microservice
+- Commons (sqlExecutorincluded)
+- DB
+- EmailMicroService
 
-## 2. Diagrama general de servicios rest
-![image](https://github.com/user-attachments/assets/d2d116b8-2701-4855-a021-3cbee077b3c1)
-
-## 3. Diagrama de secuencia de vucem 2.5
+## 2. Diagrama de secuencia de vucem 2.5
+En este diagrama se muestra la secuencia de como se realizan e interactuan las actividades que se tienen en la vucem
 ![image](https://github.com/user-attachments/assets/38369949-cfd3-4378-9195-2cdebcad876c)
+
+## 3. Diagrama general de servicios rest
+En este diagrama se muestra el flujo que se sigue para el uso de servicios rest en la vucem contemplando los componentes que se tienen en el Diagrama general de vucem 2.5
+
+![image](https://github.com/user-attachments/assets/d2d116b8-2701-4855-a021-3cbee077b3c1)
 
 
 ### 3.1. Secuencia del flujo de una solicitud en vucem
