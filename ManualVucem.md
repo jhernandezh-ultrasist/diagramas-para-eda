@@ -27,10 +27,10 @@ Básicamente tiene los siguientes componentes:
 - Una vez atendida la petición, el Front controller hace uso de un ‘Layout manager’ para construir el contenido web o página que será despachado de regreso al cliente vía un componente JSP.
 - Esta capa se comunica con todos los servicios de infraestructura para soportar los requerimientos no funcionales y utilerías comunes a la arquitectura.
 
+1. Este es el diagrama de capas de presentacion
 ![image](https://github.com/user-attachments/assets/07a9bbc2-a5b2-4db7-a299-41c80ed34862)
 
-### 4.1.1. Diagrama de secuencia presentacion
-En la figura siueinte se muestra la secuencia dinámica de interacción descrita
+2. En la figura siueinte se muestra la secuencia dinámica de interacción descrita
 ![image](https://github.com/user-attachments/assets/0584cb37-8566-4d73-9aec-2fdb56c439b4)
 
 ### 4.2. Capa de servicios
@@ -51,12 +51,33 @@ En la figura siguiente se muestra la secuencia dinámica de interacción descrit
 ![image](https://github.com/user-attachments/assets/b5c0bc02-f1ec-49a6-9c30-6d5cba92c0c3)
 
 ### 4.3. Capa de integración
+En esta capa se ejecuta el proceso de integración a otros sistemas o a la persistencia misma de la propuesta arquitectónica.
+
+Básicamente tiene los siguientes componentes:
+
+1. Repository: Entidad encargada de especializar el tipo de comunicación – persistencia requerida dependiendo del back end.
+2. Helper: Encargado ejecutar la transformación especifica (Query, invocación, empaquetado) especifico dependiendo del tipo de repositorio a utilizar.
+3. Business domain: Encargado de representar entidades de negocio y sus atributos los cuales serán enviados al Repository pertinente.
+4. Spring Channel: Encargado de la comunicación con Middleware de integración (MQ, Integrator, Interchange) a través de JMS para mensajería y FTP para generación y consumo de archivos.
+5. Servicios de infraestructura: Contiene a los componentes y los subsistemas de soporte para los servicios funcionales (de negocio)
+
 ![image](https://github.com/user-attachments/assets/aae62298-bafc-42ee-b7eb-faa16b2c009f)
 
 ### 4.3.1. Diagrama de secuencia integracion
 ![image](https://github.com/user-attachments/assets/bff5bca5-3071-4bde-ab03-c41483b8db94)
 
 ### 4.4. Vista de implementación
+La propuesta arquitectónica está organizada en 4 capas:
+- De presentación.
+- De servicios.
+- De integración.
+- De infraestructura.
+
+Los elementos de una capa sólo pueden comunicarse con los elementos de la capa contigua:
+1. Presentación –> Servicios
+2. Servicios –> Integración
+3. Presentación, Servicios o Integración -> Infraestructura
+
 ![image](https://github.com/user-attachments/assets/b3d96b4e-e885-4eea-a6a2-41185a748cb9)
 
 ### 4.4.1. Elementos de cada capa y sus relaciones
