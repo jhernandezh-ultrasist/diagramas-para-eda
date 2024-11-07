@@ -19,15 +19,35 @@ Este documento cuenta con los diagramas de la VUCEM 3.0 con el objetivo de servi
 ## 4. Vista de Procesos
 
 ### 4.1. Capa de presentación
+En esta capa se ejecuta la transformación de la información procesada por la capa intermedia.
+
+Básicamente tiene los siguientes componentes:
+
+- Front controller: Encargado de obtener las peticiones ejecutadas por un cliente conocido (Web server) vía HTTP, o HTTP-Request, una vez obtenida la petición ejecuta un proceso de llamado al servicio correspondiente para atender la petición.
+- Una vez atendida la petición, el Front controller hace uso de un ‘Layout manager’ para construir el contenido web o página que será despachado de regreso al cliente vía un componente JSP.
+- Esta capa se comunica con todos los servicios de infraestructura para soportar los requerimientos no funcionales y utilerías comunes a la arquitectura.
+
 ![image](https://github.com/user-attachments/assets/07a9bbc2-a5b2-4db7-a299-41c80ed34862)
 
 ### 4.1.1. Diagrama de secuencia presentacion
+En la figura siueinte se muestra la secuencia dinámica de interacción descrita
 ![image](https://github.com/user-attachments/assets/0584cb37-8566-4d73-9aec-2fdb56c439b4)
 
 ### 4.2. Capa de servicios
+En esta capa se ejecuta el proceso lógico de negocio del aplicativo.
+
+Básicamente tiene los siguientes componentes:
+
+-Business service: Encargado de recibir la petición filtrada y traducida a objetos de negocio para ejecutar operaciones – lógica de negocio – sobre los datos recibidos.
+- Business rule: Encargado de encapsular reglas de negocio claras y consistentes para especializar el manejo y cálculo de operaciones, facilitando encapsulamiento de conocimiento y favoreciendo la mantenibilidad.
+- Business helper: Encargado de procesos auxiliares de procesamiento.
+- Business domain: Encargado de representar entidades de negocio y sus atributos, sobre los cuales se ejecutan las operaciones del Business service de acuerdo a las Business rules.
+- End point (Adapter): En caso de requerir exponer los servicios de negocio a otros clientes diferentes del cliente conocido –web- se utiliza un Adapter – End point dependiendo del protocolo particular de exposición de servicio (p.e. Web service). Cada componente tiene que ser tratado para su publicación ya que no hay publicación por default.
+
 ![image](https://github.com/user-attachments/assets/535c60c7-8ef7-40a3-bd25-b2eadc85ba76)
 
 ### 4.2.1. Diagrama de secuencia servicios
+En la figura siguiente se muestra la secuencia dinámica de interacción descrita
 ![image](https://github.com/user-attachments/assets/b5c0bc02-f1ec-49a6-9c30-6d5cba92c0c3)
 
 ### 4.3. Capa de integración
