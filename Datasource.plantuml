@@ -1,0 +1,50 @@
+@startuml DataSource
+
+actor "VUCEM\n back" as VucemBack
+participant "Tunnel\n " as Tunnel
+participant "VUCEM\n Controller" as VucemController
+participant "Engine\n Proxy" as EngineProxy
+participant "Factory\n " as Factory
+participant "SQLExecutor\n " as SqlExecutor
+participant "Datasource\n Microservice" as DatasourceMicroservice
+participant "IngressPoint\n " as IngressPoint
+
+hide footbox
+
+VucemBack -> Tunnel: init / continue
+activate Tunnel
+Tunnel -> VucemController: runBPD\nendpoint
+activate VucemController
+deactivate
+VucemController -> EngineProxy: runBPD\n method
+activate EngineProxy
+deactivate
+EngineProxy -> Factory: getIngressPoint
+activate Factory
+deactivate
+Factory -> SqlExecutor: getNextTaskId
+activate SqlExecutor
+deactivate
+SqlExecutor -> DatasourceMicroservice: executeSQL
+activate DatasourceMicroservice
+deactivate
+activate SqlExecutor
+DatasourceMicroservice --> SqlExecutor
+deactivate SqlExecutor
+Factory -> IngressPoint: start
+activate IngressPoint
+deactivate
+IngressPoint -> SqlExecutor: executeSQL
+activate SqlExecutor
+deactivate
+SqlExecutor -> DatasourceMicroservice: executeSQL
+activate DatasourceMicroservice
+deactivate
+activate SqlExecutor
+DatasourceMicroservice --> SqlExecutor
+deactivate
+activate IngressPoint
+IngressPoint -> IngressPoint
+deactivate
+
+@enduml
