@@ -83,4 +83,14 @@ Los elementos de una capa sólo pueden comunicarse con los elementos de la capa 
 ### 4.4.1. Elementos de cada capa y sus relaciones
 ![image](https://github.com/user-attachments/assets/40acbf31-d62d-4e4f-b415-0e608959ab6b)
 
+Relaciones entre capas
+
+| Desde/hacia     |Presentacion | Servicios | Integracion | Infraestructura |
+|-----------------|-------------|-----------|-------------|-----------------|
+| Presentación    | --          | Si        | No          | Si              |
+| Servicios       | No          | --        | Si          | Si              |
+| Integración     | No          | No        | --          | Si              |
+| Infraestructura | No          | No        | No          | No              |
+
+
 >Nota: Para mayor informacion de los tramites de la vucem visitar el sitio web del [SAT](https://www.sat.gob.mx/home)
