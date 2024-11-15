@@ -1,0 +1,30 @@
+@startuml Diagrama de Secuencia Capa de Presentacion
+
+actor "Usuario" as Usuario
+participant "Browser\n " as Browser
+participant "Sequencer\n REST Controller" as SequencerRestController
+participant "LoginService\n " as LoginService
+participant "Identity Manager\n " as IdentityManager #FFFF72
+participant "LDAP / \n ActiveDirectory" as LdapActiveDirectory
+
+hide footbox
+
+Usuario -> Browser:  Captura credenciales
+activate Browser
+Browser -> SequencerRestController: SSL-Login
+activate SequencerRestController
+SequencerRestController -> LoginService: login
+activate LoginService
+LoginService -> IdentityManager: OAuth2
+activate IdentityManager
+IdentityManager --> LdapActiveDirectory: query
+LdapActiveDirectory --> IdentityManager: response
+IdentityManager -> IdentityManager: Create / validate \n JWT
+
+IdentityManager --> LoginService: send JWT
+deactivate IdentityManager
+LoginService --> SequencerRestController: send JWT
+deactivate LoginService
+SequencerRestController --> Browser: send JWT
+deactivate SequencerRestController
+@enduml
