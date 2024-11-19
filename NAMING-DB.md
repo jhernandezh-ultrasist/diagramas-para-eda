@@ -29,9 +29,9 @@ Todos los objetos serán nombrados de acuerdo a los formatos de estándares list
 
 |**Tipo de Objeto** |**Atributos del nombre requeridos** |**Ejemplo** |
 | - | - | - |
-|Instancia|<p>- Nombre de más de 8 caracteres; </p><p>- Empezar con el identificador de la aplicación; </p><p>- Finalizar con d si es una base de desarrollo, t si  es  una  base  de  datos  de  validación /pruebas,  p  si  es  una  base  de  datos  de producción </p><p>￿ </p><p>Debe ser único en el ambiente del servidor.</p>|echimpd echimpt echimpp|
-|Base de datos|<p>￿ </p><p>￿ </p>|<p>Mismo nombre que el nombre de la instancia seguido de las convenciones de nombrado de instancia </p><p>Debe ser único dentro de la instancia.</p>|echimpd echimpt echimpp|
-| - | - | - | - |
+|Instancia|<p>- Nombre de más de 8 caracteres; </p><p>- Empezar con el identificador de la aplicación; </p><p>- Finalizar con d si es una base de desarrollo, t si  es  una  base  de  datos  de  validación /pruebas,  p  si  es  una  base  de  datos  de producción </p><p> </p><p>- Debe ser único en el ambiente del servidor.</p>|echimpd echimpt echimpp|
+|Base de datos|<p></p><p></p>|<p>- Mismo nombre que el nombre de la instancia seguido de las convenciones de nombrado de instancia </p><p>Debe ser único dentro de la instancia.</p>|echimpd echimpt echimpp|
+| - | - | - |
 |Espacio de tabla|<p>￿ ￿ </p><p>￿ ￿ </p><p>￿ </p>|<p>Nombre de más de 25 caracteres; </p><p>Comenzar con el identificador de la aplicación y terminar con;** </p><p>**\_data** si el espacio de tabla sujeta datos; **\_indx**  si  el  espacio  de  tabla  sujeta  datos indexados; </p><p>Debe ser único en la base de datos.</p>|adm\_data, adm\_indx|
 |Tabla|￿ ￿ ￿ |<p>Nombre de (máximo) 30 caracteres </p><p>Nombre en singular </p><p>No  debe  contener  palabras  reservadas  o caracteres especiales.</p>|factura,  persona, viaje\_redondo |
 |Índice|￿ ￿ ￿ ￿ |<p>Máximo 30 caracteres; </p><p>Debe ser único dentro de la base de datos; Debe iniciar con idx\_ </p><p>Debe tener el nombre de la tabla, con el sufijo del tipo de índice.</p>|idx\_correo |
