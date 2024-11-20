@@ -1,128 +1,100 @@
 ﻿**Codigos de respuesta HTTP** 
 
-1xx: Respuestas Informativas 
+**1xx: Respuestas Informativas** 
 
 Petición recibida, continuando proceso. Esta respuesta significa que el servidor ha recibido los encabezados de la petición, y que el cliente debería proceder a enviar el cuerpo de la misma (en el caso de peticiones para las cuales el cuerpo necesita ser enviado; por ejemplo, una petición Hypertext Transfer Protocol). Si el cuerpo de la petición es largo, es ineficiente enviarlo a un servidor, cuando la petición ha sido ya rechazada, debido a encabezados inapropiados. Para hacer que un servidor cheque si la petición podría ser aceptada basada únicamente en los encabezados de la petición, el cliente debe enviar Expect: 100-continue como un encabezado en su petición inicial (vea Plantilla:Web-RFC: Expect header) y verificar si un código de estado 100 Continue es recibido en respuesta, antes de continuar (o recibir 417 Expectation Failed y no continuar) 
 
-100 - Continue 
-
+**100 - Continue**
 El navegador puede continuar realizando su petición (se utiliza para indicar que la primera parte de la petición del navegador se ha recibido correctamente) 
 
-101 - Switching Protocols 
-
+**101 - Switching Protocols**
 El servidor acepta el cambio de protocolo propuesto por el navegador (puede ser por ejemplo un cambio de HTTP 1.0 a HTTP 1.1) 
 
-102 - Processing (WebDAV - RFC 2518) 
-
+**102 - Processing (WebDAV - RFC 2518)**
 El servidor está procesando la petición del navegador pero todavía no ha terminado (esto evita  que el  navegador  piense  que  la  petición  se ha perdido  cuando no  recibe  ninguna respuesta) 
 
-103 - Checkpoint 
-
+**103 - Checkpoint**
 Se va a reanudar una petición POST o PUT que fue abortada previamente.2 
 
-2xx: Peticiones correctas 
-
+**2xx: Peticiones correctas**
 Esta clase de código de estado indica que la petición fue recibida correctamente, entendida y aceptada. 
 
-200 - OK 
-
+**200 - OK** 
 Respuesta estándar para peticiones correctas. 
 
-201 - Created 
-
+**201 - Created**
 La petición ha sido completada y ha resultado en la creación de un nuevo recurso. 
 
-202 - Accepted 
-
+**202 - Accepted**
 La petición ha sido aceptada para procesamiento, pero este no ha sido completado. La petición eventualmente pudiere no ser satisfecha, ya que podría ser no permitida o prohibida cuando el procesamiento tenga lugar. 
 
-203 - Non-Authoritative Information (desde HTTP/1.1) 
-
+**203 - Non-Authoritative Information (desde HTTP/1.1)**
 La petición se ha completado con éxito, pero su contenido no se ha obtenido de la fuente originalmente solicitada sino de otro servidor 
 
-204 - No Content 
-
+**204 - No Content**
 La petición se ha completado con éxito pero su respuesta no tiene ningún contenido (la respuesta sí que puede incluir información en sus cabeceras HTTP) 
 
-205 - Reset Content 
-
+**205 - Reset Content**
 La petición se ha completado con éxito, pero su respuesta no tiene contenidos y además, el navegador tiene que inicializar la página desde la que se realizó la petición (este código es útil por ejemplo para páginas con formularios cuyo contenido debe borrarse después de que el usuario lo envíe) 
 
-206 - Partial Content 
-
+**206 - Partial Content**
 La petición servirá parcialmente el contenido solicitado. Esta característica es utilizada por herramientas  de  descarga  como  wget  para  continuar  la  transferencia  de  descargas anteriormente  interrumpidas,  o  para  dividir  una  descarga  y  procesar  las  partes simultáneamente. 
 
-207 - Multi-Status (Multi-Status, WebDAV) 
-
+**207 - Multi-Status (Multi-Status, WebDAV)**
 El cuerpo del mensaje que sigue es un mensaje XML y puede contener algún número de códigos de respuesta separados, dependiendo de cuántas sub-peticiones sean hechas. 
 
-208 - Already Reported (WebDAV) 
-
+**208 - Already Reported (WebDAV)**
 El listado de elementos DAV ya se notificó previamente, por lo que no se van a volver a listar. 
 
-3xx: Redirecciones 
-
+**3xx: Redirecciones**
 El cliente tiene que tomar una acción adicional para completar la petición. 
 
 Esta clase de código de estado indica que una acción subsecuente necesita efectuarse por el agente de usuario para completar la petición. La acción requerida puede ser llevada a cabo por el agente de usuario sin interacción con el usuario si y solo si el método utilizado en la segunda petición es GET o HEAD. El agente de usuario no debe redirigir automáticamente una  petición  más  de  5  veces,  dado  que  tal  funcionamiento  indica  usualmente  un  Bucle infinito. 
 
-300 - Multiple Choices 
-
+**300 - Multiple Choices**
 Indica opciones múltiples para el URI que el cliente podría seguir. Esto podría ser utilizado, por ejemplo, para presentar distintas opciones de formato para video, listar archivos con distintas extensiones o word sense disambiguation. 
 
-301 - Moved Permanently 
-
+**301 - Moved Permanently**
 Esta y todas las peticiones futuras deberían ser dirigidas a la URI dada. 
 
-302 - Found 
-
+**302 - Found**
 Este es el código de redirección más popular, pero también un ejemplo de las prácticas de la industria contradiciendo el estándar. La especificación HTTP/1.0 (RFC 1945) requería que el cliente  realizara  una  redirección  temporal  (la  frase  descriptiva  original  fue  "Moved Temporarily"), pero los navegadores populares lo implementaron como 303 See Other. Por tanto, HTTP/1.1 añadió códigos de estado 303 y 307 para eliminar la ambigüedad entre ambos  comportamientos.  Sin  embargo,  la  mayoría  de  aplicaciones  web  y  bibliotecas  de desarrollo aún utilizan el código de respuesta 302 como si fuera el 303. 
 
-303 - See Other (desde HTTP/1.1) 
-
+**303 - See Other (desde HTTP/1.1)**
 La respuesta a la petición puede ser encontrada bajo otra URI utilizando el método GET. 
 
-304 - Not Modified 
-
+**304 - Not Modified**
 Indica que la petición a la URL no ha sido modificada desde que fue requerida por última vez. Típicamente, el cliente HTTP provee un encabezado como If-Modified-Since para indicar una fecha y hora contra la cual el servidor pueda comparar. El uso de este encabezado ahorra ancho de banda y reprocesamiento tanto del servidor como del cliente. 
 
-305 - Use Proxy (desde HTTP/1.1) 
-
+**305 - Use Proxy (desde HTTP/1.1)**
 Muchos clientes HTTP (como Mozilla3 e Internet Explorer) no se apegan al estándar al procesar respuestas con este código, principalmente por motivos de seguridad. 
 
-306 - Switch Proxy 
-
+**306 - Switch Proxy**
 Este código se utilizaba en las versiones antiguas de HTTP pero ya no se usa (aunque está reservado para usos futuros) 
 
-307 - Temporary Redirect (desde HTTP/1.1) 
-
+**307 - Temporary Redirect (desde HTTP/1.1)**
 Se trata de una redirección que debería haber sido hecha con otra URI, sin embargo aún puede ser procesada con la URI proporcionada. En contraste con el código 303, el método de la petición no debería ser cambiado cuando el cliente repita la solicitud. Por ejemplo, una solicitud POST tiene que ser repetida utilizando otra petición POST. 
 
-308 - Permanent Redirect 
-
+**308 - Permanent Redirect**
 El  recurso  solicitado  por  el  navegador  se  encuentra  en  otro  lugar  y  este  cambio  es permanente. A diferencia del código 301, no se permite cambiar el método HTTP para la nueva petición (así por ejemplo, si envías un formulario a un recurso que ha cambiado de lugar, todo seguirá funcionando bien) 
 
-4xx Errores del cliente 
+**4xx Errores del cliente**
 
 La solicitud contiene sintaxis incorrecta o no puede procesarse. 
 
 La intención de la clase de códigos de respuesta 4xx es para casos en los cuales el cliente parece  haber  errado  la  petición.  Excepto  cuando  se  responde  a  una  petición  HEAD,  el servidor debe incluir una entidad que contenga una explicación a la situación de error, y si es una condición temporal o permanente. Estos códigos de estado son aplicables a cualquier método de solicitud (como GET o POST). Los agentes de usuario deben desplegar cualquier entidad  al  usuario.  Estos  son  típicamente  los  códigos  de  respuesta  de  error  más comúnmente encontrados. 
 
-400 - Bad Request 
+**400 - Bad Request**
+La solicitud contiene sintaxis errónea y no debería repetirse. 
 
-`    `La solicitud contiene sintaxis errónea y no debería repetirse. 
+**401 - Unauthorized**
+Similar al 403 Forbidden, pero específicamente para su uso cuando la autentificación es posible pero ha fallado o aún no ha sido provista. Vea autentificación HTTP básica y Digest access authentication. 
 
-401 - Unauthorized 
+**402 - Payment Required**
+La intención original era que este código pudiese ser usado como parte de alguna forma o esquema de Dinero electrónico o micropagos, pero eso no sucedió, y este código nunca se utilizó. 
 
-`    `Similar al 403 Forbidden, pero específicamente para su uso cuando la autentificación es posible pero ha fallado o aún no ha sido provista. Vea autentificación HTTP básica y Digest access authentication. 
-
-402 - Payment Required 
-
-`    `La intención original era que este código pudiese ser usado como parte de alguna forma o esquema de Dinero electrónico o micropagos, pero eso no sucedió, y este código nunca se utilizó. 
-
-403 - Forbidden 
-
-`    `La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia. 
+**403 - Forbidden** 
+La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia. 
 
 404 - Not Found 
 
